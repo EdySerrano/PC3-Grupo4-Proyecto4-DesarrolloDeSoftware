@@ -11,3 +11,10 @@ def test_run_openssl_success(monkeypatch):
     monkeypatch.setattr(subprocess, "run", fake_run)
     out = runners.run_openssl_s_client("host.test", 443)
     assert out == "REAL STDOUT"
+
+def test_run_openssl_calledprocesserror_returns_stderr(monkeypatch):
+    def fake_run(args, capture_output, text, timeout, check):
+        raise subprocess.CalledProcessError(returncode=1, cmd=args, stderr="ERR-STERR")
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    out = runners.run_openssl_s_client("host.test", 443)
+    assert out == "ERR-STERR"

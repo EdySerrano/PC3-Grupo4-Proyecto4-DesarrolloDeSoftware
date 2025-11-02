@@ -38,3 +38,18 @@ def test_check_tls_parametrized(
     assert result["status"] == expected_status
     assert expected_details_fragment in result["details"]
     assert result["host"] == "fake-host.com"
+
+
+def test_check_tls_handles_unknown_exception(monkeypatch):
+
+    def raise_value_error(host: str, port: int) -> str:
+        raise ValueError("error")
+
+    monkeypatch.setattr(auditors.runners, "run_openssl_s_client", raise_value_error)
+
+    result = auditors.check_tls_version("fake-host.com", 443)
+
+    assert result["status"] == "ERROR"
+    assert "Unknown error" in result["details"]
+    assert "error" in result["details"]
+

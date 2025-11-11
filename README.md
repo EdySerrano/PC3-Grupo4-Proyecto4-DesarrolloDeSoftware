@@ -18,7 +18,6 @@ El Proyecto 4 - **“Audit-CLI”** consiste en el desarrollo de una herramienta
 PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/
 ├── docs/                           
 │   └── README.md                  
-│
 ├── src/                            
 │   └── main.py
 │

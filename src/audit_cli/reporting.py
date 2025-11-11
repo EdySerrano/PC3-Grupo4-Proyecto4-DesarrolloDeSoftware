@@ -28,3 +28,19 @@ def results_to_csv(results: List[AuditResult]) -> str:
     writer.writerows(results)
 
     return output.getvalue()
+
+
+def save_report(content: str, output_file: str = None):
+    """
+    Guarda el contenido del reporte en un archivo o lo imprime en consola.
+    """
+    if output_file:
+        try:
+            with open(output_file, "w", encoding="utf-8") as f:
+                f.write(content)
+            print(f"Reporte guardado en: {output_file}", file=sys.stderr)
+        except IOError as e:
+            print(f"Error al escribir archivo: {e}", file=sys.stderr)
+    else:
+        # Si no hay --output, imprime el reporte a stdout
+        print(content)

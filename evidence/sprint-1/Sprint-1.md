@@ -1,5 +1,5 @@
 # Tablero:
-En el tablero podemos registrar los avances y issues Open (abiertos) y Done (Terminadas)
+En el grafico podemos registrar los avances y issues Open (abiertos) y Done (Terminadas)
 
 ![alt text](Imagenes/Burndown.png)
 
@@ -21,4 +21,4 @@ Finalmente despues de generar un Pull Request y revisar la funcionalidad, si cum
 
 ![alt text](Imagenes/Done.png)
 
-Asi 
+

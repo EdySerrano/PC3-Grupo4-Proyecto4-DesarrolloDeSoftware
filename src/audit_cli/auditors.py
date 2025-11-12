@@ -6,15 +6,15 @@ from .models import AuditResult  # Importamos nuestro contrato
 
 def check_tls_version(host: str, port: int = 443) -> AuditResult:
     """
-    Lógica de auditoría para verificar TLS.
-    AHORA retorna un diccionario que cumple el contrato AuditResult.
+    Logica de auditoria para verificar TLS.
+    Retorna un diccionario que cumple el contrato AuditResult.
     """
 
-    # Función para generar el timestamp
+    # Funcion para generar el timestamp
     def get_timestamp() -> str:
         return datetime.datetime.utcnow().isoformat() + "Z"
 
-    # Función para construir la respuesta
+    # Funcion para construir la respuesta
     def build_response(status: str, details: str) -> AuditResult:
         return {
             "host": host,

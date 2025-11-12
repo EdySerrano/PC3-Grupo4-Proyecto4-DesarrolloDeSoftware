@@ -62,5 +62,36 @@ El Sprint 2 concluyo con la integracion exitosa de la generacion y validacion de
 
 Gracias a la colaboracion constante reflejada en los **daily scrums** y a las decisiones adoptadas, el equipo consolido una versión mas completa y madura de Audit-CLI y lista para su validacion integral en el proximo sprint.
 
-## Sprint 3
+## Sprint 3 - Automatizacion, Integracion Continua y Evidencias del Proyecto
 
+Durante el Sprint 3 del proyecto “Audit-CLI: stubs de binarios del sistema + pruebas parametrizadas”, el equipo se enfocó en consolidar la automatizacion de los procesos de desarrollo, la integracion continua del codigo y la entrega formal de evidencias del proyecto. Este sprint se centro de ser un entorno de desarrollo local a un flujo de trabajo completamente automatizado y reproducible. En nuestro daily scrum, discutimos los avances de cada integrante, los ajustes en la configuracion del CI/CD y la estandarizacion de herramientas para que cualquier miembro de nuestro equipo pudiera ejecutar tareas del proyecto de forma normal y sin problemas.
+
+### Decisiones de arquitectura, patrones y políticas
+
+Durante este sprint, se definieron políticas que fortalecen la calidad, reproducibilidad y trazabilidad del proyecto, con enfoque en la automatizacion:
+
+* Primero, acordamos centralizar todas las tareas recurrentes del entorno de desarrollo en un Makefile, el cual fue diseñado como punto de entrada unico para instalacion, pruebas, linting, limpieza y generación de reportes, esta decision fue propuesta por Frank Hinojoza para garantizar la uniformidad en la ejecucion de comandos, eliminando diferencias entre entornos locales y CI.
+
+* Segundo, establesimos una pipeline de Integracion Continua (CI) basada en GitHub Actions, el cual ejecuta validaciones automaticas del codigo Python y de la infraestructura Terraform en cada push o pull request dirigido a las ramas principales (develop y main). Este flujo fue desarrollado por Germain Choquechambi, reforzando las politicas de control de calidad y asegura que el codigo fusionado cumpla con estandares de linting, testing y cobertura minima (85%).
+
+* Finalmente, se definio una politica de documentacion estructurada de evidencias realizada por Edy Serrano el cual garantiza la trazabilidad de los resultados del sprint mediante la creacion de la carpeta evidence/sprint-3/, esta carpeta almacena capturas del tablero, salidas de pruebas y un video resumen que facilita la revision del avance y la gestion del proyecto.
+
+### Implementaciones realizadas
+
+El issue implementado por Frank Hinojoza consistio en la creacion de un Makefile con comandos estandarizados que simplifican las tareas del entorno local. Se añadieron targets para `install`, `lint`, `test`, `coverage`, `clean` y `help`, empleando herramientas como `pip`, `ruff`, `flake8`, `pytest` y `coverage`. El comando `make install` instala las dependencias de desarrollo y producción, `make lint` aplica correcciones de formato y valida la calidad del código y `make test` permite ejecutar pruebas unitarias de modulos especifico, tambien el target `make help` genera una lista autodescriptiva de comandos, lo que facilita la utilizacion de estas herramientas, esta implementacion fue importante para lograr consistencia en el flujo de trabajo y reducir errores manuales durante las ejecuciones locales.
+
+Por otro lado, Germain Choquechambi implementó la pipeline de CI en GitHub Actions, estructurada en dos jobs paralelos:
+
+* **python-ci**: encargado de ejecutar el linting con flake8, correr las pruebas unitarias con pytest y verificar que la cobertura supere el 85%.
+
+* **terraform-ci**: dedicado a validar la infraestructura del proyecto ejecutando terraform `fmt -check`, `terraform validate`, `tflint` y `terraform plan` dentro del directorio infra/terraform.
+
+Esta configuracion garantiza que ningun cambio sea fusionado sin cumplir con los estandares tecnicos definidos, consolidando una cultura de calidad continua y automatizacion responsable.
+
+Finalmente, Yo Edy Serrano fui responsable de la documentacion y entrega de evidencias del Sprint 3. Cree la carpeta evidence/sprint-3/ dentro del repositorio, donde se incluyeron los archivos con imagenes del tablero y grafico Burndown sobre los issues del proyecto y video.md (que documenta el resumen del sprint, conceptos y proximos pasos para el siguiente Sprint). Tambien, se grabo un video de entre mostrando el estado del tablero, la cobertura alcanzada y las mejoras logradas en la infraestructura de CI. Esta documentacion refuerza la transparencia del proceso y facilita la evaluación del progreso del equipo 4 .
+
+### Resultados del Sprint 3
+
+En el Sprint 3 se logro la integracion del Makefile, la pipeline CI/CD y la documentacion de evidencias lo cual elevó la calidad del entorno de desarrollo y redujo la posibilidad de errores humanos.
+
+Gracias al trabajo colaborativo y la comunicacion constante en los daily scrums (30-45 min), el equipo logro cerrar el sprint con un entorno de desarrollo estandarizado y validado, listo para futuras ampliaciones y despliegues controlados. Este sprint es el  cierre del ciclo de desarrollo base del proyecto, cumpliendo con los objetivos del proyecto 4..

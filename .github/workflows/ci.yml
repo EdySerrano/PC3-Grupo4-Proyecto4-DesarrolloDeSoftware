@@ -1,3 +1,4 @@
+---
 name: CI de Audit-CLI
 
 on:
@@ -11,42 +12,42 @@ on:
       - develop
 
 jobs:
-  
-  python-ci: 
+  python-ci:
     name: CI de Python
     runs-on: ubuntu-latest
 
     steps:
-      - name: 1. Checkout del codigo
+      - name: 1. Checkout del código
         uses: actions/checkout@v4
 
       - name: 2. Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'  
+          python-version: '3.10'
 
       - name: 3. Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt 
+          pip install -r requirements.txt
 
-      - name: 4. GATE: Linting con Flake8
+      - name: 4. Linting con Flake8
         run: flake8 . --count --show-source --statistics
 
-      - name: 5. GATE: Pruebas con Pytest y Cobertura
+      - name: 5. Pruebas con Pytest y Cobertura
         env:
           PYTHONPATH: ./src
-        run: pytest --cov=audit_cli --cov-fail-under=85
+        run: "pytest --cov=audit_cli --cov-fail-under=85"
+
   terraform-ci:
     name: CI de Terraform
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         working-directory: ./infra/terraform
 
     steps:
-      - name: 1. Checkout del codigo
+      - name: 1. Checkout del código
         uses: actions/checkout@v4
 
       - name: 2. Configurar Terraform
@@ -55,7 +56,7 @@ jobs:
       - name: 3. Configurar TFLint
         uses: terraform-linters/setup-tflint@v4
         with:
-          tflint_version: v0.50.3 
+          tflint_version: v0.50.3
 
       - name: 4. Inicializar Terraform
         run: terraform init

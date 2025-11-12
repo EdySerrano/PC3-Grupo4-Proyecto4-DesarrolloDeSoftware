@@ -17,15 +17,11 @@ MOCK_TIMEOUT_EXCEPTION = TimeoutError("Comando openssl timed out")
         (MOCK_REFUSED_OUTPUT, "ERROR", "Conexion rechazada"),
         (MOCK_TIMEOUT_EXCEPTION, "ERROR", "timed out"),
         ("some other random output", "FAIL", "no detectado"),
-    ]
+    ],
 )
 def test_check_tls_parametrized(
-    monkeypatch,
-    stub_simulation,
-    expected_status,
-    expected_details_fragment
+    monkeypatch, stub_simulation, expected_status, expected_details_fragment
 ):
-
     def mock_run_openssl(host: str, port: int) -> str:
         if isinstance(stub_simulation, Exception):
             raise stub_simulation
@@ -41,7 +37,6 @@ def test_check_tls_parametrized(
 
 
 def test_check_tls_handles_unknown_exception(monkeypatch):
-
     def raise_value_error(host: str, port: int) -> str:
         raise ValueError("error")
 
@@ -52,4 +47,3 @@ def test_check_tls_handles_unknown_exception(monkeypatch):
     assert result["status"] == "ERROR"
     assert "Unknown error" in result["details"]
     assert "error" in result["details"]
-

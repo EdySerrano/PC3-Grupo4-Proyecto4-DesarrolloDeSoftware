@@ -46,7 +46,7 @@ install:
 .PHONY: lint
 lint: ## Formatea (ruff), ordena imports (ruff I), autofix y pasa flake8 relajado
 	@echo "Formateando con Ruff..."
-	ruff format src/audit_cli
+	ruff format src/audit_cli tests
 	@echo "Ordenando imports (Ruff rule I)..."
 	ruff check src/audit_cli --select I --fix
 	@echo "Autofix de reglas con Ruff (whitespace, etc.)..."

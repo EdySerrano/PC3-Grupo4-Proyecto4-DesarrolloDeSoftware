@@ -1,5 +1,6 @@
-import subprocess
 import shlex
+import subprocess
+
 
 def run_openssl_s_client(host: str, port: int) -> str:
     """
@@ -14,7 +15,8 @@ def run_openssl_s_client(host: str, port: int) -> str:
             capture_output=True,
             text=True,
             timeout=5,
-            check=True
+            check=True,
+            input=""
         )
         return result.stdout
     except subprocess.TimeoutExpired:

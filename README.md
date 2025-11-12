@@ -16,24 +16,92 @@ El Proyecto 4 - **“Audit-CLI”** consiste en el desarrollo de una herramienta
 
 ```
 PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/
-├── docs/                           
-│   └── README.md                  
-├── src/                            
-│   └── main.py
+├── .github/                       # Configuración de GitHub Actions
+├── .gitignore                      
+├── Makefile                        
+├── README.md                      # Documentación principal
+├── pytest.ini                    
+├── requirements.txt               # Dependencias de Python
 │
-├── tests/                         
-│   └── test..  
+├── docs/                          # Documentación del proyecto
+│   ├── .gitkeep                   
+│   └── decisiones.md              # Decisiones de diseño
 │
-├── makefile             
-└── .gitignore  
+├── src/                           # Código fuente principal
+│   └── audit_cli/                 # Módulo principal de la CLI
+│       ├── auditors.py            # Modulos de auditoría
+│       ├── main.py                # Punto de entrada CLI
+│       ├── models.py              # Modelos de datos
+│       ├── reporting.py           # Generacion de reportes
+│       └── runners.py             # Ejecutores de comandos
+│
+├── tests/                         # Suite de pruebas
+│   ├── conftest.py                
+│   ├── unit/                      
+│   │   ├── test_auditors.py       
+│   │   ├── test_reporting.py      
+│   │   └── test_runners.py        
+│
+├── infra/                         # IaC
+│   └── terraform/                 
+│       ├── main.tf                
+│       └── version.tf             
+│
+└── evidence/                      # Evidencia de sprints
+    ├── sprint-1/                  
+    ├── sprint-2/                  
+    └── sprint-3/                  
 ```
 
 ## Instrucciones de uso:
 
-| Target | Descripcion |
+| Target | Descripción |
 |--------|-------------|
-| make tools | Verifica las dependencias necesarias (nc, curl, dig, bats, ss, journalctl) |
-...
+| `make help` | Muestra la ayuda con todos los comandos disponibles |
+| `make install` | Instala dependencias de Python (requirements.txt y requirements-dev.txt) |
+| `make lint` | Formatea código Python con Ruff, ordena imports y ejecuta flake8 |
+| `make lint-terraform` | Valida y formatea código Terraform |
+| `make validate-iac` | Alias para lint-terraform (valida y formatea Terraform) |
+| `make test` | Ejecuta pytest en el módulo especificado (por defecto: unit) |
+| `make test_all` | Ejecuta pytest en todos los módulos (unit, 2e2, integration) |
+| `make coverage` | Ejecuta pytest con cobertura unificada para todos los módulos |
+| `make coverage_individual` | Ejecuta cobertura para un módulo específico |
+| `make run-audit` | Ejecuta auditoría TLS (configurable con variables AUDIT_*) |
+| `make audit-json` | Genera reporte de auditoría en formato JSON |
+| `make clean` | Elimina archivos temporales, caches y reportes |
+
+### Ejemplos de uso:
+
+```bash
+# Instalación y configuración
+make install                    # Instalar dependencias
+make lint                      # Formatear código Python
+make lint-terraform           # Formatear código Terraform
+
+# Pruebas
+make test                     # Ejecutar pruebas unitarias
+make test MODULE=integration  # Ejecutar pruebas de integración
+make test_all                # Ejecutar todas las pruebas
+make coverage                # Cobertura de código
+
+# Auditoría
+make run-audit                                    # Auditar google.com:443 (por defecto)
+make run-audit AUDIT_HOST=github.com AUDIT_PORT=443  # Auditar host específico
+make audit-json AUDIT_HOST=example.com           # Generar reporte JSON
+make clean                                       # Limpiar archivos temporales
+```
+
+### Variables configurables:
+
+| Variable | Valor por defecto | Descripción |
+|----------|-------------------|-------------|
+| `MODULE` | `unit` | Módulo de pruebas a ejecutar |
+| `PYTEST_FLAGS` | `-q -v` | Flags adicionales para pytest |
+| `AUDIT_HOST` | `google.com` | Host para auditoría TLS |
+| `AUDIT_PORT` | `443` | Puerto para auditoría TLS |
+| `AUDIT_FORMAT` | `console` | Formato de salida (console, json, csv) |
+| `AUDIT_OUTPUT` | ` ` | Archivo de salida (opcional) |
+| `TERRAFORM_DIR` | `infra/terraform` | Directorio de archivos Terraform |
 
 
 ## Ramas:

@@ -16,7 +16,7 @@ def run_openssl_s_client(host: str, port: int) -> str:
             text=True,
             timeout=5,
             check=True,
-            input=""
+            input="",
         )
         return result.stdout
     except subprocess.TimeoutExpired:

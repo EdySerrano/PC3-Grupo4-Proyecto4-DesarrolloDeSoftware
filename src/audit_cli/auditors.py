@@ -34,7 +34,9 @@ def check_tls_version(host: str, port: int = 443) -> AuditResult:
         if "Connection refused" in output:
             return build_response("ERROR", "Conexion rechazada")
 
-        return build_response("FAIL", "TLSv1.2 no detectado o handshake fallido")
+        return build_response(
+            "FAIL", "TLSv1.2 no detectado o handshake fallido"
+            )
 
     except TimeoutError as e:
         return build_response("ERROR", str(e))

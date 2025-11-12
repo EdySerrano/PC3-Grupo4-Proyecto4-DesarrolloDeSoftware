@@ -6,3 +6,5 @@ reporte.json
 .terraform/
 .terraform.lock.hcl
 terraform.tfstate
+pc3
+.coverage

@@ -31,7 +31,9 @@ def test_check_tls_parametrized(
             raise stub_simulation
         return stub_simulation
 
-    monkeypatch.setattr(auditors.runners, "run_openssl_s_client", mock_run_openssl)
+    monkeypatch.setattr(
+        auditors.runners, "run_openssl_s_client", mock_run_openssl
+    )
 
     result = auditors.check_tls_version("fake-host.com", 443)
 
@@ -45,11 +47,12 @@ def test_check_tls_handles_unknown_exception(monkeypatch):
     def raise_value_error(host: str, port: int) -> str:
         raise ValueError("error")
 
-    monkeypatch.setattr(auditors.runners, "run_openssl_s_client", raise_value_error)
+    monkeypatch.setattr(
+        auditors.runners, "run_openssl_s_client", raise_value_error
+    )
 
     result = auditors.check_tls_version("fake-host.com", 443)
 
     assert result["status"] == "ERROR"
     assert "Unknown error" in result["details"]
     assert "error" in result["details"]
-

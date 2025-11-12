@@ -38,9 +38,9 @@ PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/
 ├── tests/                         # Suite de pruebas
 │   ├── conftest.py                
 │   ├── unit/                      
-│   │   ├── test_auditors.py       
-│   │   ├── test_reporting.py      
-│   │   └── test_runners.py        
+│      ├── test_auditors.py       
+│      ├── test_reporting.py      
+│      └── test_runners.py        
 │
 ├── infra/                         # IaC
 │   └── terraform/                 
@@ -48,9 +48,18 @@ PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/
 │       └── version.tf             
 │
 └── evidence/                      # Evidencia de sprints
-    ├── sprint-1/                  
-    ├── sprint-2/                  
-    └── sprint-3/                  
+│   ├── sprint-1/
+│      ├── Imagenes/     
+│      ├── video.md      
+│      └── Sprint-1.md                
+│   ├── sprint-2/
+│      ├── Imagenes/     
+│      ├── video.md      
+│      └── Sprint-2.md                    
+│   └── sprint-3/
+│      ├── Imagenes/     
+│      ├── video.md      
+│      └── Sprint-3.md                    
 ```
 
 ## Instrucciones de uso:
@@ -110,16 +119,18 @@ make clean                                       # Limpiar archivos temporales
 - *Hinojosa Frank:* [Frank-Hinojosa/auditoria](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Frank-Hinojosa/auditoria)
 - *Choquecambi Germain:* [Germain-Choquechambi/test-auditors-runners](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Choquechambi-Germain/test-auditors-runners)
 - *Serrano Edy:* [Edy-Serrano/Stub-para-openssl](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Edy-Serrano/Stub-para-openssl)
+- *Serrano Edy:* [Edy-Serrano/Documentacion-Sprint1](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Edy-Serrano/Documentacion-Sprint1)
 
 *Sprint-2:*
 - *Serrano Edy:* [Edy-Serrano/Reportes-JSON](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Edy-Serrano/Reportes-JSON)
-- *Hinojosa Frank:* [Frank-Hinojosa/]()
-- *Choquecambi Germain:* [Germain-Choquechambi/]()
+- *Hinojosa Frank:* [Frank-Hinojosa/topologia-iac](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Frank-Hinojosa/topologia-iac)
+- *Choquecambi Germain:* [Germain-Choquechambi/test-modulo-reporting](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Germain-Choquechambi/test-modulo-reporting)
+- *Serrano Edy:* [Edy-Serrano/Documentacion-Sprint2](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Edy-Serrano/Documentacion-Sprint2)
 
 *Sprint-3:*
-- *Hinojosa Frank:* [Frank-Hinojosa/]()
-- *Choquecambi Germain:* [Germain-Choquechambi/]()
-- *Serrano Edy:* [Edy-Serrano/]()
+- *Hinojosa Frank:* [Frank-Hinojosa/makefile](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Frank-Hinojosa/makefile)
+- *Choquecambi Germain:* [Germain-Choquechambi/pipeline-ci](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Germain-Choquechambi/pipeline-ci)
+- *Serrano Edy:* [Edy-Serrano/Documentacion-Sprint3](https://github.com/EdySerrano/PC3-Grupo4-Proyecto4-DesarrolloDeSoftware/tree/Edy-Serrano/Documentacion-Sprint3)
 
 
 

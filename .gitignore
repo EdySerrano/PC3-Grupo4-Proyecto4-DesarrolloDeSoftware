@@ -1,0 +1,8 @@
+__pycache__
+.__pytest_cache
+.ruff_cache
+reporte.json
+.env
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate

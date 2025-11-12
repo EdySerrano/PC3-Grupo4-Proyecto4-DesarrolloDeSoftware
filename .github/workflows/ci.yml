@@ -37,3 +37,40 @@ jobs:
         env:
           PYTHONPATH: ./src
         run: pytest --cov=audit_cli --cov-fail-under=85
+  terraform-ci:
+    name: CI de Terraform
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./infra/terraform
+
+    steps:
+      - name: 1. Checkout del codigo
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: 3. Configurar TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.50.3 
+
+      - name: 4. Inicializar Terraform
+        run: terraform init
+
+      - name: 5. Inicializar TFLint
+        run: tflint --init
+
+      - name: 6. Validar Formato (fmt)
+        run: terraform fmt -check
+
+      - name: 7. Validar Sintaxis (validate)
+        run: terraform validate
+
+      - name: 8. Linting con TFLint
+        run: tflint --recursive
+
+      - name: 9. Validar Plan (plan)
+        run: terraform plan -no-color

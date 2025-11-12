@@ -1,4 +1,4 @@
-# Tablero:
+# Tablero Sprint 1:
 En el grafico podemos registrar los avances y issues Open (abiertos) y Done (Terminadas)
 
 ![alt text](Imagenes/Burndown.png)

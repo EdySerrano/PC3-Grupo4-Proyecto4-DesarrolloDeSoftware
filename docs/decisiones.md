@@ -34,7 +34,33 @@ Terminamos el Sprint 1 con una base solida y completamente funcional del nucleo 
 La arquitectura modular, el uso sistemático de stubs, y la correcta separación entre interfaz y logica, son las bases para los próximos sprints, donde se implementara los reportes de salida (JSON/CSV) y la topología de pruebas automatizadas con Terraform.
 
 
-## Sprint 2
+## Sprint 2 - Exportación de reportes y topología Terraform mínima
 
+Durante el Sprint 2 del proyecto “Audit-CLI: stubs de binarios del sistema + pruebas parametrizadas”, nuestro equipo se enfoco en extender la funcionalidad del CLI hacia la generacion de reportes en formatos estandar (JSON y CSV) y la creacion de una topología mínima con Terraform para sustentar las pruebas de integración previstas para el siguiente sprint. En nuestro daily scrum, revisamos los avances del sprint anterior y se tomamos decisiones respecto a la estructura del nuevo modulo reporting.py, la definicion formal del contrato de datos AuditResult, y la organizacion del entorno de infraestructura reproducible mediante Terraform.
+
+### Decisiones de arquitectura, patrones y políticas
+
+Durante este sprint se consolidaron tres pilares arquitectónicos del proyecto: interoperabilidad, trazabilidad e infraestructura reproducible.
+
+* Primero, introdujimos un contrato de salida estandarizado mediante un *TypedDict* en models.py llamado AuditResult, que define los campos de toda la auditoría (host, puerto, estado, detalles, timestamp). Esta decision fue propuesta por Edy Serrano, y asi se garantiza consistencia entre auditorias y facilita la integracion con herramientas externas de Business Intelligence (BI).
+
+* Segundo, se aplico un patron de separación de responsabilidades en el modulo reporting.py, encargando a este componente toda la logica relacionada con el formateo y exportación de resultados. Asi la capa CLI solo orquesta la interaccion, mientras que reporting.py se responsabiliza de los formatos de salida y la escritura en disco o consola.
+
+* Finalmente, se adoptó una política de IaC (Infraestructura como Código) con Terraform, usando el proveedor Docker para crear entornos locales reproducibles. Esto permitirá realizar pruebas End-to-End (E2E) en el siguiente sprint de manera aislada lo que nos  asegura que las configuraciones se mantengan versionadas, idempotentes y auditables.
+
+### Implementaciones realizadas
+
+El issue propuesto por Edy Serrano se centró en la exportación de resultados de auditoria en formatos estandar JSON y CSV, asi como en la extensión del CLI con nuevas opciones: --format y --output. Se implemento el módulo reporting.py, el cual contiene funciones dedicadas a convertir los resultados (results_to_json, results_to_csv) y almacenarlos en un archivo o imprimirlos en consola segun las opciones del usuario. El contrato AuditResult en models.py asegura que todos los resultados mantengan una estructura uniforme, lo que nos facilita en la generacion automatizada de reportes. Las pruebas manuales y automatizadas confirmaron que los reportes son validos y cumplen con las especificaciones de formato y contenido.
+
+Por otro lado Germian Choquechambi desarrolló las pruebas unitarias completas del nuevo modulo reporting.py, usando pytest diseñó fixtures que simulan el sistema de archivos (tmp_path) y capturan la salida estandar (capsys), y validando asi correctamente el comportamiento de save_report bajo diferentes condiciones. Tambien comprobó que los archivos generados contienen las cabeceras correctas derivadas del contrato AuditResult, que el contenido CSV puede ser leído mediante csv.DictReader y que las salidas por consola coinciden con el formato esperado cuando no se especifica una ruta de salida, estas pruebas aseguran la integridad de los reportes y refuerzan la mantenibilidad del modulo.
+
+Finalmente, Frank Hinojoza implementó la topologia minima de Terraform, ubicada en el directorio infra/terraform. Utilizo el proveedor Docker, se creo una configuracion que lanza un contenedor nginx llamado audit-cli-target-nginx-s2, mapeando el puerto 80 del contenedor al 8080 del host. Esta infraestructura sirve como entorno controlado para las pruebas E2E que se desarrollarán en el Sprint 3, permitiendo simular un objetivo remoto sin depender de servicios externos, las pruebas de despliegue verificaron que los comandos terraform init y terraform apply ejecutan correctamente la provision del contenedor, cumpliendo los criterios de aceptación definidos.
+
+### Resultados del Sprint 2
+
+El Sprint 2 concluyo con la integracion exitosa de la generacion y validacion de reportes dentro del flujo principal del CLI y con una infraestructura minima funcional lista para las pruebas E2E. Se fortalecieron los cimientos tecnicos del proyecto al garantizar consistencia estructural de los resultados, independencia del entorno y reproducibilidad del sistema.
+
+Gracias a la colaboracion constante reflejada en los **daily scrums** y a las decisiones adoptadas, el equipo consolido una versión mas completa y madura de Audit-CLI y lista para su validacion integral en el proximo sprint.
 
 ## Sprint 3
+

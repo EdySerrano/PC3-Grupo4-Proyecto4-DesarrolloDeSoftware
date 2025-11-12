@@ -4,7 +4,7 @@ import shlex
 def run_openssl_s_client(host: str, port: int) -> str:
     """
     Ejecuta el comando 'openssl s_client' real.
-    Esta es la función que VAMOS A REEMPLAZAR (stub) en los tests.
+    Esta es la función que se va a reemplazar (stub) en los tests.
     """
     cmd = f"openssl s_client -connect {host}:{port} -tls1_2"
 
